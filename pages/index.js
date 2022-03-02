@@ -1,8 +1,26 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { useState } from "react";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  const [num1, setNum1] = useState(0);
+  const [num2, setNum2] = useState(0);
+  const [result, setResult] = useState(0);
+
+  const add = () => {
+    setResult(parseInt(num1) + parseInt(num2));
+  };
+  const subtract = () => {
+    setResult(parseInt(num1) - parseInt(num2));
+  };
+  const multiply = () => {
+    setResult(parseInt(num1) * parseInt(num2));
+  };
+  const divide = () => {
+    setResult(parseInt(num1) / parseInt(num2));
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -11,59 +29,44 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <div className={styles.result} data-testid="result">
+        {result}
+      </div>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      <input
+        type="number"
+        className={styles.input}
+        data-testid="num1"
+        value={num1}
+        onChange={(e) => setNum1(e.target.value)}
+      />
+      <input
+        type="number"
+        className={styles.input}
+        data-testid="num2"
+        value={num2}
+        onChange={(e) => setNum2(e.target.value)}
+      />
+      <button onClick={add} className={styles.button} data-testid="add">
+        Add
+      </button>
+      <button
+        onClick={subtract}
+        className={styles.button}
+        data-testid="subtract"
+      >
+        Subtract
+      </button>
+      <button
+        onClick={multiply}
+        className={styles.button}
+        data-testid="multiply"
+      >
+        Multiply
+      </button>
+      <button onClick={divide} className={styles.button} data-testid="divide">
+        Divide
+      </button>
     </div>
-  )
+  );
 }
